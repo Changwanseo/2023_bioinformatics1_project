@@ -1,15 +1,15 @@
-Status	../../data/project/RNA-siLuc.bam	../../data/project/RPF-siLuc.bam
-Assigned	9748787	12932285
-Unassigned_Unmapped	2331467	995087
-Unassigned_Read_Type	0	0
-Unassigned_Singleton	0	0
-Unassigned_MappingQuality	0	0
-Unassigned_Chimera	0	0
-Unassigned_FragmentLength	0	0
-Unassigned_Duplicate	0	0
-Unassigned_MultiMapping	13999092	26408669
-Unassigned_Secondary	0	0
-Unassigned_NonSplit	0	0
-Unassigned_NoFeatures	1661248	752105
-Unassigned_Overlapping_Length	0	0
-Unassigned_Ambiguity	376647	914289
+Status	../../data/project/CLIP-35L33G.bam	../../data/project/RNA-control.bam	../../data/project/RNA-siLin28a.bam	../../data/project/RNA-siLuc.bam	../../data/project/RPF-siLin28a.bam	../../data/project/RPF-siLuc.bam
+Assigned	13630945	5200836	12338280	9748787	10694162	12932285
+Unassigned_Unmapped	2291075	12594234	2169478	2331467	917228	995087
+Unassigned_Read_Type	0	0	0	0	0	0
+Unassigned_Singleton	0	0	0	0	0	0
+Unassigned_MappingQuality	0	0	0	0	0	0
+Unassigned_Chimera	0	0	0	0	0	0
+Unassigned_FragmentLength	0	0	0	0	0	0
+Unassigned_Duplicate	0	0	0	0	0	0
+Unassigned_MultiMapping	17781701	5511892	18072245	13999092	16675170	26408669
+Unassigned_Secondary	0	0	0	0	0	0
+Unassigned_NonSplit	0	0	0	0	0	0
+Unassigned_NoFeatures	4669517	1395594	2035101	1661248	720876	752105
+Unassigned_Overlapping_Length	0	0	0	0	0	0
+Unassigned_Ambiguity	507615	268502	493074	376647	1088115	914289
