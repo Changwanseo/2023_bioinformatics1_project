@@ -1,3 +1,4 @@
+:<<"END"
 grep '	start_codon	.*	+	.*transcript_support_level "1"' ../../data/gencode.vM27.annotation.gtf | \
  sed -e 's/	[^	]*transcript_id "\([^"]*\)".*$/	\1/g' > gencode-start.gtf
 
@@ -13,6 +14,8 @@ head gencode-plusexon.gtf
 #bedtools intersect -a gencode-start.gtf -b gencode-plusexon.gtf -wa -wb | \
 # awk -F'    ' -v OFS='  ' '$9 == $18 { print $10, $13-1, $14, $18, $4-1, $16; }' | \
 # sort -k1,1 -k2,3n -k4,4 > gencode-exons-containing-startcodon.bed
+
+bedtools intersect -a gencode-start.gtf -b gencode-plusexon.gtf -wa -wb |  awk -F'        ' -v OFS='      ' '$9 == $18 { print $10, $13-1, $14, $18, $4-1, $16; }' |  sort -k1,1 -k2,3n -k4,4 > gencode-exons-containing-startcodon.bed
 
 head gencode-exons-containing-startcodon.bed; tail gencode-exons-containing-startcodon.bed
 
@@ -30,3 +33,21 @@ head fivepcounts-RPF-siLuc.bed
 bedtools intersect -a fivepcounts-RPF-siLuc.bed -b gencode-exons-containing-startcodon.bed -wa -wb -nonamecheck > fivepcounts-filtered-RPF-siLuc.txt
 
 head fivepcounts-filtered-RPF-siLuc.txt
+END
+
+# For siLin28a
+
+(samtools view -H ../../data/project/RPF-siLin28a.bam; \
+  samtools view -F20 ../../data/project/RPF-siLin28a.bam | \
+  bioawk -c sam '{ if (length($seq) >= 25) print $0; }') | \
+ samtools view -b -o filtered-RPF-siLin28a.bam
+
+ ls -alh *RPF-siLin28a.bam
+
+bedtools genomecov -ibam filtered-RPF-siLin28a.bam -bg -5 > fivepcounts-RPF-siLin28a.bed
+
+head fivepcounts-RPF-siLin28a.bed
+
+bedtools intersect -a fivepcounts-RPF-siLin28a.bed -b gencode-exons-containing-startcodon.bed -wa -wb -nonamecheck > fivepcounts-filtered-RPF-siLin28a.txt
+
+head fivepcounts-filtered-RPF-siLin28a.txt
