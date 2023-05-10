@@ -3,33 +3,51 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-df = pd.read_csv("fivepcounts-filtered-RPF-siLuc.txt", sep="\t", header=None)
+def get_histogram_data(file):
+    df = pd.read_csv(file, sep="\t", header=None)
 
+    df.columns = [
+        "5pchr",
+        "5pstart",
+        "5pend",
+        "depth",
+        "exonchr",
+        "exonstart",
+        "exonend",
+        "gene",
+        "start_codon",
+        "strand",
+    ]
 
-df.columns = [
-    "5pchr",
-    "5pstart",
-    "5pend",
-    "depth",
-    "exonchr",
-    "exonstart",
-    "exonend",
-    "gene",
-    "start_codon",
-    "strand",
-]
+    df["pos"] = df["5pstart"] - df["start_codon"]
 
-df["pos"] = df["5pstart"] - df["start_codon"]
+    hist_list = []
+    for n, i in enumerate(list(df["pos"])):
+        hist_list += [i] * df["depth"][n]
 
-hist_list = []
-for n, i in enumerate(list(df["pos"])):
-    hist_list += [i] * df["depth"][n]
+    return hist_list
+
 
 # print(list(df["pos"]))
 
-plt.figure(figsize=(10, 2))
-plt.ylabel("siLuc - Raw read count")
-plt.xticks(np.arrange(-50, 50, 10))
-plt.hist(hist_list, bins=range(-50, 50), color="black")
+plt.figure(figsize=(10, 4))
+fig, ax = plt.subplots(2, 1)
+
+ax[0].set_ylabel("siLuc - Raw read count")
+ax[0].set_xticks(np.arange(-50, 50, 10))
+ax[0].hist(
+    get_histogram_data("fivepcounts-filtered-RPF-siLuc.txt"),
+    bins=range(-50, 50),
+    color="black",
+)
+
+
+ax[1].set_ylabel("siLin28a - Raw read count")
+ax[1].set_xticks(np.arange(-50, 50, 10))
+ax[1].hist(
+    get_histogram_data("fivepcounts-filtered-RPF-siLin28a.txt"),
+    bins=range(-50, 50),
+    color="black",
+)
 
 plt.savefig("Histogram.svg")
