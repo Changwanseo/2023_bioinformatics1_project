@@ -1,9 +1,5 @@
-# Should consider more about which sites to grep
-
-
-
-# Grep from gencode.gtf. Expansion this to several informative sites with iteration and paraellization
-grep -i mirlet7g gencode.gtf
+# Grep all mirlet7 from gencode.gtf. Expansion this to several informative sites with iteration and paraellization
+grep -i mirlet7 ../../data/gencode.vM27.annotation.gtf
 
 # Loop multiple bam
 samtools view -b -o CLIP-let7g.bam CLIP-35L33G.bam chr9:106056039-106056126
