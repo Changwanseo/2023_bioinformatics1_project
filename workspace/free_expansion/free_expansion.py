@@ -113,8 +113,13 @@ for n, gene in enumerate(df["attribute"]):
     ## Make track files
     cmds = [
         f"make_tracks_file --trackFiles {gene}.bedgraph -o {gene}.ini",
-        f"pyGenomeTracks --tracks {gene}.ini --region {df['chr'][n]}:{df['start'][n]}-{df['end'][n]} --trackLabelFraction 0.2 --width 38 --dpi 130  -o {gene}.svg",
+        f"pyGenomeTracks --tracks {gene}.ini --region {df['chr'][n]}:{df['start'][n]}-{df['end'][n]} --trackLabelFraction 0.2 --width 38 --dpi 300 --fontSize 20 -o {gene}.svg",
     ]
 
     for cmd in cmds:
         run = subprocess.call(cmd, shell=True)
+
+    """
+    samfile = pysam.AlignmentFile("CLIP-Mirlet7g.bam", "rb")
+    for read in 
+    """
